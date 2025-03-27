@@ -24,6 +24,13 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=82bEBr"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=82bEBr" type="text/css">
 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("DRnzBu_XpFlwLYtmo"); // <- Wstaw tutaj swój PUBLIC KEY
+    })();
+  </script>
+
  <style>
   body {
   background: #ffffff;
@@ -165,18 +172,19 @@
   </div>
 </section>
 
-<form class="form">
+<form class="form" id="contact-form">
   <h2>CONTACT US</h2>
-  <p type="Name:"><input placeholder="Write your name here.."></input></p>
-  <p type="Email:"><input placeholder="Let us know how to contact you back.."></input></p>
-  <p type="Phone Number:"><input placeholder="Let us know how to contact you back.."></input></p>
-  <p type="Message:"><input placeholder="What would you need..?"></input></p>
-  <button>Send Message</button>
+  <p type="Name:"><input name="user_name" placeholder="Write your name here.."></p>
+  <p type="Email:"><input name="user_email" placeholder="Let us know how to contact you back.."></p>
+  <p type="Phone Number:"><input name="user_phone" placeholder="Your phone number.."></p>
+  <p type="Message:"><input name="message" placeholder="What would you need..?"></p>
+  <button type="submit">Send Message</button>
   <div>
     <span class="fa fa-phone"></span>001 1023 567
     <span class="fa fa-envelope-o"></span> contact@company.com
   </div>
 </form>
+
 
 <section data-bs-version="5.1" class="footer3 cid-uGmY1gzQl7" once="footers" id="footer03-13">
 
@@ -231,5 +239,21 @@
   
   
   <input name="animation" type="hidden">
+
+
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_x94lqwc', 'template_k8qhow9', this)
+      .then(function(response) {
+        alert("Wiadomość wysłana pomyślnie!");
+      }, function(error) {
+        alert("Coś poszło nie tak...", error);
+      });
+  });
+</script>
+
   </body>
 </html>
